@@ -1,92 +1,72 @@
-# ⚡ GoodWe Smart Charger
+# GoodWe Smart Charger
 
-## Sprint 2 – Prova de Conceito Funcional
+> Plataforma inteligente de gerenciamento energético para recarga de veículos elétricos utilizando energia solar, baterias e rede elétrica de forma otimizada.
 
-### Challenge FIAP 2026 – GoodWe
-
----
-
-## Sobre o Projeto
-
-O **GoodWe Smart Charger** é uma proposta de infraestrutura inteligente para recarga de veículos elétricos, desenvolvida como parte do Challenge FIAP em parceria com a GoodWe.
-
-A solução busca transformar estacionamentos comerciais, condomínios e centros empresariais em ambientes energeticamente eficientes, utilizando fontes renováveis e sistemas inteligentes de gerenciamento de energia.
-
-A partir da proposta apresentada na Sprint 1, esta Sprint 2 apresenta uma **prova de conceito funcional**, validando tecnicamente a viabilidade do núcleo da solução: a distribuição inteligente de energia entre múltiplos carregadores.
+![Status](https://img.shields.io/badge/Status-Prova%20de%20Conceito-success)
+![ESP32](https://img.shields.io/badge/ESP32-IoT-blue)
+![Wokwi](https://img.shields.io/badge/Wokwi-Simulation-orange)
+![FIAP](https://img.shields.io/badge/FIAP-Challenge-red)
 
 ---
 
-## Problema
+# Sobre o Projeto
 
-Com o crescimento acelerado da mobilidade elétrica, surgem novos desafios relacionados à infraestrutura de recarga:
+O **GoodWe Smart Charger** é uma solução desenvolvida para o Challenge FIAP 2026 em parceria com a GoodWe.
 
-- Sobrecarga da rede elétrica devido ao carregamento simultâneo de diversos veículos;
-- Má distribuição da potência disponível;
-- Baixo aproveitamento da energia proveniente de sistemas fotovoltaicos;
-- Dependência excessiva da rede pública de energia;
-- Elevados custos operacionais;
-- Ausência de mecanismos inteligentes para priorização energética.
+O projeto propõe uma infraestrutura inteligente de recarga para veículos elétricos capaz de gerenciar a distribuição de energia entre diferentes fontes energéticas, priorizando fontes renováveis e reduzindo a dependência da rede elétrica convencional.
 
-Esses fatores reduzem a eficiência dos sistemas de recarga e comprometem sua sustentabilidade econômica e ambiental.
+A proposta evolui o conceito tradicional de carregadores para um sistema inteligente de gerenciamento energético, capaz de tomar decisões em tempo real sobre qual fonte de energia utilizar para atender à demanda de carregamento.
 
 ---
 
-## Solução Proposta
+# Problema
 
-O GoodWe Smart Charger propõe uma plataforma inteligente capaz de:
+Com o crescimento acelerado da mobilidade elétrica, surgem desafios importantes relacionados à infraestrutura energética:
 
-- Monitorar continuamente a disponibilidade energética;
-- Priorizar o uso de energia solar;
-- Utilizar bancos de baterias como fonte complementar;
+- Sobrecarga da rede elétrica;
+- Crescimento do consumo simultâneo de energia;
+- Baixo aproveitamento da geração solar;
+- Dependência excessiva da concessionária;
+- Custos operacionais elevados;
+- Falta de inteligência na distribuição energética.
+
+Sem mecanismos inteligentes de controle, o aumento da demanda pode comprometer a estabilidade da infraestrutura elétrica.
+
+---
+
+# Solução
+
+O GoodWe Smart Charger implementa um módulo central denominado **Energy Brain**, responsável por:
+
+- Monitorar a energia disponível;
+- Priorizar energia solar;
+- Utilizar baterias como fonte complementar;
 - Acionar a rede elétrica apenas quando necessário;
-- Distribuir dinamicamente a potência entre os carregadores;
+- Distribuir energia de forma inteligente;
 - Evitar situações de sobrecarga;
-- Maximizar a eficiência energética do sistema.
-
-Nesta Sprint, foi implementada uma prova de conceito da lógica de distribuição inteligente denominada **Energy Brain**.
+- Maximizar a eficiência energética.
 
 ---
 
-## 🎯 Objetivos
+# Energy Brain
 
-### Objetivo Geral
+O Energy Brain representa a camada de tomada de decisão do sistema.
 
-Demonstrar a viabilidade técnica inicial do GoodWe Smart Charger por meio de um protótipo funcional simulado.
+Sua lógica segue a seguinte prioridade:
 
-### Objetivos Específicos
+```text
+1º Energia Solar
+        ↓
+2º Banco de Baterias
+        ↓
+3º Rede Elétrica
+```
 
-- Desenvolver uma prova de conceito operacional;
-- Simular diferentes cenários de disponibilidade energética;
-- Demonstrar a priorização de fontes renováveis;
-- Evidenciar mecanismos de prevenção de sobrecarga;
-- Validar a lógica central da solução proposta.
-
----
-
-## 🧪 Prova de Conceito Desenvolvida
-
-A prova de conceito foi implementada utilizando o simulador Wokwi e um ESP32 como controlador central.
-
-O sistema recebe entradas simuladas referentes à:
-
-- Energia solar disponível;
-- Demanda total de carregamento dos veículos.
-
-A partir desses dados, o Energy Brain realiza automaticamente a distribuição da energia disponível.
-
-### Ordem de Prioridade Energética
-
-1. Energia Solar;
-2. Banco de Baterias;
-3. Rede Elétrica.
-
-Quando a demanda excede a capacidade disponível, o sistema limita a distribuição de potência, evitando sobrecargas na infraestrutura.
+Essa abordagem reduz custos energéticos e aumenta o aproveitamento das fontes renováveis.
 
 ---
 
-## Arquitetura da Solução
-
-### Arquitetura Conceitual
+# Arquitetura Conceitual
 
 ```text
 Painéis Solares
@@ -95,176 +75,268 @@ Banco de Baterias
        ↓
 Gateway IoT
        ↓
-Energy Brain (IA)
+Energy Brain
        ↓
 Nuvem GoodWe
        ↓
 Carregadores Inteligentes
        ↓
-Aplicativo do Usuário
+Aplicativo Mobile
 ```
 
-### Arquitetura da Prova de Conceito
+---
+
+# Prova de Conceito Desenvolvida
+
+Para validar a proposta foi construída uma simulação funcional utilizando ESP32 e Wokwi.
+
+O sistema recebe entradas simuladas referentes à geração solar e à demanda energética dos carregadores.
+
+Com base nesses dados, o Energy Brain calcula automaticamente a melhor estratégia de distribuição de energia.
+
+---
+
+# Arquitetura do Protótipo
 
 ```text
 Potenciômetro (Energia Solar)
-              ↓
+               ↓
 Potenciômetro (Demanda)
-              ↓
-ESP32 – Energy Brain
-              ↓
-Distribuição Inteligente
-              ↓
-LEDs Representando Carregadores
-              ↓
-Painel Administrativo (Serial Monitor)
+               ↓
+ESP32
+               ↓
+Energy Brain
+               ↓
+LCD I2C
+               ↓
+LEDs Indicadores
+               ↓
+Serial Monitor
 ```
 
 ---
 
-## Funcionamento do Protótipo
+# Tecnologias Utilizadas
 
-O sistema executa continuamente as seguintes etapas:
-
-1. Leitura da energia solar simulada;
-2. Leitura da demanda energética simulada;
-3. Cálculo da potência disponível;
-4. Priorização das fontes renováveis;
-5. Distribuição da energia entre os carregadores;
-6. Acionamento dos indicadores visuais;
-7. Exibição das informações em tempo real.
-
----
-
-## Dados Simulados
-
-Exemplo de cenários operacionais obtidos durante a simulação:
-
-| Energia Solar | Bateria | Rede | Demanda | Status |
-|---|---:|---:|---:|---|
-| 25 kW | 0 kW | 5 kW | 30 kW | Operação Normal |
-| 15 kW | 20 kW | 10 kW | 45 kW | Operação Normal |
-| 5 kW | 20 kW | 30 kW | 55 kW | Operação Normal |
-| 0 kW | 20 kW | 30 kW | 65 kW | Sobrecarga Evitada |
+- ESP32
+- Linguagem C++
+- Wokwi Simulator
+- IoT (Internet of Things)
+- Gestão Inteligente de Energia
+- Sistemas Fotovoltaicos
+- Mobilidade Elétrica
+- Arquitetura em Nuvem (conceitual)
+- Inteligência Artificial (conceitual)
 
 ---
 
-## Distribuição Energética
+# Componentes Utilizados
 
-Um exemplo de distribuição energética durante a operação do sistema é apresentado abaixo:
-
-| Fonte Energética | Energia Utilizada |
-|---|---:|
-| Energia Solar | 25 kW |
-| Banco de Baterias | 15 kW |
-| Rede Elétrica | 10 kW |
-
-Nesse cenário, aproximadamente **80% da energia utilizada é proveniente de fontes renováveis e armazenamento local**, reduzindo significativamente a dependência da rede elétrica convencional.
-
----
-
-## Sustentabilidade e Eficiência Energética ♻️
-
-A sustentabilidade é um dos pilares centrais da proposta.
-
-A solução promove:
-
-- Maior aproveitamento da energia gerada por sistemas fotovoltaicos;
-- Redução da dependência da rede elétrica convencional;
-- Utilização inteligente dos bancos de baterias;
-- Redução de desperdícios energéticos;
-- Mitigação indireta das emissões de carbono;
-- Uso racional dos recursos energéticos disponíveis.
-
-Além disso, o uso do ESP32 demonstra a aplicação de dispositivos eletrônicos de baixo consumo energético em sistemas inteligentes de gestão.
+| Componente | Função |
+|------------|---------|
+| ESP32 | Controlador principal |
+| Potenciômetro 1 | Simulação da geração solar |
+| Potenciômetro 2 | Simulação da demanda energética |
+| LCD 16x2 I2C | Exibição das informações |
+| LED Verde | Energia solar em uso |
+| LED Amarelo | Banco de baterias em uso |
+| LED Azul | Rede elétrica em uso |
+| Push Button | Alternância de telas |
 
 ---
 
-## Relação com Energias Renováveis
+# Ligações do Circuito
 
-A proposta está diretamente alinhada aos princípios estudados na disciplina ao integrar fontes renováveis ao processo de carregamento de veículos elétricos.
+| Componente | ESP32 |
+|------------|--------|
+| Potenciômetro Solar (SIG) | GPIO 34 |
+| Potenciômetro Demanda (SIG) | GPIO 35 |
+| Botão | GPIO 18 |
+| LED Amarelo | GPIO 25 |
+| LED Azul | GPIO 26 |
+| LED Verde | GPIO 27 |
+| LCD SDA | GPIO 21 |
+| LCD SCL | GPIO 22 |
 
-O modelo desenvolvido evidencia que sistemas inteligentes podem:
+### Alimentação
 
-- Maximizar o aproveitamento da energia solar;
-- Reduzir impactos ambientais;
-- Melhorar a estabilidade da infraestrutura elétrica;
-- Incentivar a expansão sustentável da mobilidade elétrica.
-
----
-
-## 🧠 Energy Brain
-
-O Energy Brain representa a camada decisória do sistema.
-
-Na prova de conceito, suas funções incluem:
-
-- Monitoramento energético;
-- Priorização das fontes disponíveis;
-- Distribuição dinâmica da potência;
-- Prevenção de sobrecargas.
-
-Em futuras evoluções, essa camada poderá incorporar algoritmos avançados de Inteligência Artificial para previsão de demanda, análise de padrões de consumo e otimização preditiva da infraestrutura energética.
+| Componente | Ligação |
+|------------|----------|
+| Potenciômetros | 3.3V e GND |
+| LCD I2C | 5V e GND |
+| LEDs | Resistor 220Ω → GND |
 
 ---
 
-## Tecnologias Utilizadas
+# Funcionamento
 
-- ESP32;
-- Wokwi Simulator;
-- Linguagem C++;
-- Internet das Coisas (IoT);
-- Sistemas Fotovoltaicos;
-- Gestão Inteligente de Energia;
-- Mobilidade Elétrica;
-- Computação em Nuvem (arquitetura conceitual);
-- Inteligência Artificial (arquitetura conceitual).
+O sistema executa continuamente os seguintes processos:
 
----
-
-## Como Executar
-
-1. Abrir o projeto no simulador Wokwi;
-2. Iniciar a simulação;
-3. Ajustar o potenciômetro responsável pela energia solar disponível;
-4. Ajustar o potenciômetro responsável pela demanda energética;
-5. Observar os LEDs correspondentes aos carregadores ativos;
-6. Monitorar as informações exibidas no Serial Monitor;
-7. Analisar os diferentes cenários de distribuição energética.
+1. Leitura da energia solar disponível;
+2. Leitura da demanda energética;
+3. Cálculo da potência necessária;
+4. Distribuição inteligente das fontes;
+5. Atualização dos indicadores visuais;
+6. Monitoramento em tempo real.
 
 ---
 
-## Resultados Obtidos
+# Indicadores do Sistema
 
-A prova de conceito demonstrou que a lógica central do GoodWe Smart Charger é tecnicamente viável.
+| LED | Significado |
+|------|-------------|
+| 🟢 Verde | Energia solar utilizada |
+| 🟡 Amarelo | Banco de baterias utilizado |
+| 🔵 Azul | Rede elétrica utilizada |
 
-Os testes simulados evidenciaram que o sistema consegue:
+Os LEDs podem permanecer acesos simultaneamente, indicando a utilização combinada de diferentes fontes energéticas.
 
-- Distribuir energia de maneira inteligente;
+---
+
+# Interface do Usuário
+
+## Tela 1
+
+```text
+Solar: XX kW
+Dem: YY kW
+```
+
+Exibe a energia solar disponível e a demanda atual.
+
+---
+
+## Tela 2
+
+```text
+Fonte: Solar
+Operacao OK
+```
+
+ou
+
+```text
+Fonte: Solar+Bateria
+Operacao OK
+```
+
+ou
+
+```text
+Fonte: Sol+Bat+Rede
+Operacao OK
+```
+
+ou
+
+```text
+Fonte: Sol+Bat+Rede
+Sobrecarga!
+```
+
+---
+
+# Cenários Testados
+
+## Cenário 1 — Energia Solar Suficiente
+
+```text
+Solar = 30 kW
+Demanda = 10 kW
+```
+
+Resultado:
+
+- Utilização exclusiva da energia solar;
+- Operação normal.
+
+---
+
+## Cenário 2 — Complementação por Bateria
+
+```text
+Solar = 10 kW
+Demanda = 25 kW
+```
+
+Resultado:
+
+- Utilização da bateria como suporte;
+- Operação normal.
+
+---
+
+## Cenário 3 — Complementação por Rede
+
+```text
+Solar = 5 kW
+Demanda = 50 kW
+```
+
+Resultado:
+
+- Utilização das três fontes energéticas;
+- Operação normal.
+
+---
+
+## Cenário 4 — Limite de Potência
+
+```text
+Solar = 0 kW
+Demanda = 60 kW
+```
+
+Resultado:
+
+- Sistema utiliza todos os recursos disponíveis;
+- Limitação inteligente da potência;
+- Sobrecarga evitada.
+
+---
+
+# Sustentabilidade
+
+A proposta busca maximizar o aproveitamento de energia renovável através de:
+
+- Energia solar fotovoltaica;
+- Utilização estratégica de baterias;
+- Redução do consumo da rede elétrica;
+- Menor desperdício energético;
+- Maior eficiência operacional.
+
+---
+
+# Resultados
+
+A prova de conceito demonstrou que a lógica central do Energy Brain é capaz de:
+
 - Priorizar fontes renováveis;
-- Utilizar baterias como suporte energético;
-- Acionar a rede elétrica apenas quando necessário;
-- Evitar situações de sobrecarga;
-- Adaptar-se dinamicamente às variações de demanda.
+- Distribuir energia de forma inteligente;
+- Adaptar-se dinamicamente à demanda;
+- Utilizar múltiplas fontes energéticas;
+- Evitar sobrecargas da infraestrutura.
 
-Esses resultados indicam o potencial da solução para aplicações futuras em ambientes comerciais e corporativos.
-
----
-
-## Trabalhos Futuros
-
-Como evolução do projeto, propõe-se:
-
-- Desenvolvimento do aplicativo móvel funcional;
-- Integração com serviços em nuvem;
-- Implementação de autenticação de usuários;
-- Cobrança automatizada das sessões de recarga;
-- Aplicação de modelos de Inteligência Artificial preditiva;
-- Integração com carregadores e inversores reais da GoodWe.
+Os testes realizados validaram a viabilidade técnica da proposta para aplicações em estacionamentos, condomínios e ambientes corporativos.
 
 ---
 
-## 👥 Equipe
+# 🚀 Próximos Passos
+
+- Aplicativo mobile funcional;
+- Dashboard administrativo em nuvem;
+- Integração com MQTT;
+- Integração com APIs da GoodWe;
+- Sistema de autenticação de usuários;
+- Cobrança automatizada;
+- Algoritmos preditivos com IA;
+- Integração com carregadores reais.
+
+---
+
+# 👥 Equipe
+
+**Challenge FIAP 2026 – GoodWe**
 
 - RM 572431 – Mateus de Oliveira Fernandes Neves
 - RM 571285 – Pedro Soares de Souza
@@ -274,6 +346,23 @@ Como evolução do projeto, propõe-se:
 
 ---
 
-## Licença
+# Licença
 
-Projeto desenvolvido exclusivamente para fins acadêmicos e educacionais, como parte do Challenge FIAP 2026 em parceria com a GoodWe.
+Projeto desenvolvido para fins acadêmicos e educacionais como parte do Challenge FIAP 2026 em parceria com a GoodWe.
+
+---
+
+## Competências Demonstradas
+
+- Internet das Coisas (IoT)
+- Sistemas Embarcados
+- ESP32
+- Linguagem C++
+- Energia Solar
+- Gestão Inteligente de Energia
+- Eficiência Energética
+- Mobilidade Elétrica
+- Wokwi
+- Smart Charging
+- Smart Grid
+- Prototipagem de Soluções Tecnológicas
